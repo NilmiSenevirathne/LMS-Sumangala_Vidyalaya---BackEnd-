@@ -23,15 +23,15 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Map<String, String> credentials) {
-        String username = credentials.get("username");
+        String userId = credentials.get("userId");
         String password = credentials.get("password");
 
-        User user = loginRepo.findByUsernameAndPassword(username, password);
+        User user = loginRepo.findByUserIdAndPassword(userId,password);
 
         if (user != null) {
             return ResponseEntity.ok(((User) user).getRole().toString());
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid User_id or Password");
         }
     }
 
